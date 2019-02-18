@@ -18,9 +18,9 @@ for m in 0...numberOfElements do
   array << input
 end
 
-rowSize = array.map{|e| e[0]}.max
+$rowSize = array.map{|e| e[0]}.max
 
-colSize = array.map{|e| e[1]}.max
+$colSize = array.map{|e| e[1]}.max
 
 original = []
 
@@ -165,36 +165,38 @@ def printValues(seats, colSize, rowSize)
 
 end
 
-seat = fillWithMAandW(array)
+$seat = fillWithMAandW(array)
 
 
 #print array
 
-puts " enter the number of passengers"
+def airplane
 
-number = gets.chomp().to_i
+ puts " enter the number of passengers"
 
-number = number + 1
+ number = gets.chomp().to_i
 
-#printValues(seat,colSize,rowSize)
+ number = number + 1
 
-obj=replaceWithNumber("A",1,seat,colSize,rowSize,number)
+ #printValues(seat,colSize,rowSize)
 
-#puts obj[:count]
+ obj=replaceWithNumber("A",1,$seat,$colSize,$rowSize,number)
 
-if (obj[:count] < number) 
+ #puts obj[:count]
 
-  obj= replaceWithNumber("W",obj[:count] ,obj[:seats] ,colSize,rowSize,number)      
+ if (obj[:count] < number) 
 
-end
+  obj= replaceWithNumber("W",obj[:count] ,obj[:seats] ,$colSize,$rowSize,number)      
+
+ end
 
 if(obj[:count] < number)
   
    
-  obj = replaceWithNumber("M", obj[:count], obj[:seats], colSize, rowSize,number)
+  obj = replaceWithNumber("M", obj[:count], obj[:seats],$colSize, $rowSize,number)
 
 end
-printValues(seat,colSize,rowSize)
+printValues($seat,$colSize,$rowSize)
 
 for i in 0...obj[:seats].length
 
@@ -206,4 +208,14 @@ for i in 0...obj[:seats].length
 
 	 print s
 end
+end
+ 
+def recursive 
 
+   airplane 
+
+   recursive
+
+end
+
+recursive
